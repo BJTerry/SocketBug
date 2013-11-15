@@ -1,0 +1,23 @@
+var wsock = new WebSocket("ws://localhost:3000");
+//var wsock = new Object();
+wsock.onmessage = (function(m){
+    $('#websocket').append("<li>Received: " + m.data + "</li>");
+});
+
+wsock.onerror = (function(e){
+    $('#websocket').append("<li>Error: " + e.data + "</li>");
+
+});
+
+wsock.onclose = (function(){
+    $('#websocket').append("<li>Closed</li>");
+
+});
+
+wsock.onopen = (function(){
+    $('#websocket').append("<li>Opened</li>");
+    $('#websocket').append("<li>Sending TestMessage</li>");
+    wsock.send("TestMessage");
+});
+
+
